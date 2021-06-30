@@ -55,11 +55,9 @@ function inputHeight(length, width) {
 // All input just in one code
 function input() {
   rl.question('Length: ', function (length) {
-    length++;
-    console.log(length);
     rl.question('Width: ', (width) => {
       rl.question('Height: ', (height) => {
-        if (!isNaN(length) && !isNaN(width) && !isNaN(height)) {
+        if (length > 0 && width > 0 && height > 0) {
           console.log(`\nBeam: ${beam(length, width, height)}`);
           rl.close();
         } else {
@@ -74,5 +72,5 @@ function input() {
 
 console.log(`Rectangle`);
 console.log(`=========`);
-// inputLength(); // Call way 1
-input(); // Call Alternative Way
+inputLength(); // Call way 1
+// input(); // Call Alternative Way

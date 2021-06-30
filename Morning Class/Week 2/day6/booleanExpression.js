@@ -33,3 +33,27 @@ if (f === g) {
 }
 
 console.log(result);
+
+// More example
+// AND will be displaying the last true when all condition is true, if there are one condition that false, it will return false
+let j = 5;
+let k = 5;
+
+let result2 = j == k && f == 2 && 'c is equal to d' && 'my name is david';
+
+console.log('result2', result2);
+
+/* OR Operator */
+let l = 1;
+let m = 2;
+let n = 5;
+let o = 5;
+
+console.log(l == m || n == o); // true
+
+// More example
+// OR will be displaying the first true and if there are no true, it will return false
+let p = null;
+let q = p || 'my name is gema' || 'my name is bayu';
+
+console.log('q', q);

@@ -1,12 +1,12 @@
 // Import readline
-const readline = require("readline");
+const readline = require('readline');
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-const cuboid = require("./function/cuboid"); // import cuboid
-const cube = require("./function/cube"); // import cube
+const cuboid = require('./function/cuboid'); // import cuboid
+const cube = require('./function/cube'); // import cube
 
 function isEmptyOrSpaces(str) {
   return str === null || str.match(/^ *$/) !== null;
