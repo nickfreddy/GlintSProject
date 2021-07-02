@@ -24,29 +24,4 @@ function createArrayElement() {
 
 createArray();
 
-/*
- * Code Here!
- * */
 console.log(data);
-console.log(clean(data));
-
-function clean(data) {
-  // Code here
-  return data.filter((item) => item !== null);
-}
-
-/*
- * DON'T CHANGE
- * */
-
-if (process.argv.slice(2)[0] == 'test') {
-  try {
-    clean(data).forEach((i) => {
-      if (i == null) {
-        throw new Error('Array still contains null');
-      }
-    });
-  } catch (err) {
-    console.error(err.message);
-  }
-}
