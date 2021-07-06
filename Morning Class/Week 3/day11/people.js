@@ -8,4 +8,4 @@ people.push(new Male('Rezki Ade Pratama Putra'));
 people.push(new Female('Gema'));
 people[0].walk();
 
-// Person.breath(); // Actually, this is a right way to call static method/function
+Person.kill(); // Actually, this is a right way to call static method/function

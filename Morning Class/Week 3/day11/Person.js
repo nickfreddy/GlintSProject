@@ -26,4 +26,14 @@ class Person {
   }
 }
 
+// Add instance method
+Person.prototype.greet = function () {
+  console.log('Hello, Guys!');
+};
+
+// Add static method
+Person.kill = function () {
+  console.log('I will kill you!');
+};
+
 module.exports = Person;
