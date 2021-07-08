@@ -18,8 +18,8 @@ const read = async () => {
 
 const read1 = async () => {
   try {
-    let newData = `Hello`;
-    console.log(newData);
+    let david = await readFile('./data/david.txt', 'utf-8');
+    console.log(david);
   } catch (error) {
     throw error;
   }
@@ -27,3 +27,7 @@ const read1 = async () => {
 
 read();
 read1();
+
+for (let index = 0; index < 100000; index++) {
+  console.log('Hello, World!');
+}
