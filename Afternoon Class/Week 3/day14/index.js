@@ -2,6 +2,14 @@ const express = require('express'); // Import express
 
 const app = express(); // Make express app
 
+// Enables req.body
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+
 // Import routes
 const helloRoutes = require('./routes/helloRoutes');
 
