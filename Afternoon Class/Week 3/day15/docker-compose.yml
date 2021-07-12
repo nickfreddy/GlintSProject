@@ -8,8 +8,6 @@ services:
     volumes:
       - ./db-mysql:/var/lib/mysql
     environment:
-      MYSQL_USER: reza
-      MYSQL_PASSWORD: reza
       MYSQL_ROOT_PASSWORD: root
 
 volumes:
