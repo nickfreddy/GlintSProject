@@ -4,12 +4,10 @@ services:
   db:
     image: mysql:8
     ports:
-      - 3306:3306
+      - '3306:3306'
     volumes:
       - ./db-mysql:/var/lib/mysql
     environment:
-      MYSQL_USER: reza
-      MYSQL_PASSWORD: reza
       MYSQL_ROOT_PASSWORD: root
 
 volumes:
