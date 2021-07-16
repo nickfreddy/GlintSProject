@@ -28,7 +28,7 @@ class Transactions {
       }
 
       // If success
-      return res.status(200).json({ data });
+      res.status(200).json({ data });
     } catch (e) {
       // If error
       next(e);
@@ -62,7 +62,7 @@ class Transactions {
       }
 
       // If success
-      return res.status(200).json({ data });
+      res.status(200).json({ data });
     } catch (e) {
       // If error
       next(e);
@@ -138,7 +138,7 @@ class Transactions {
       });
 
       // If success
-      return res.status(201).json({ data });
+      res.status(201).json({ data });
     } catch (e) {
       // If error
       next(e);
@@ -157,7 +157,7 @@ class Transactions {
       }
 
       // If success
-      return res.status(200).json({ message: 'Success delete transaction' });
+      res.status(200).json({ message: 'Success delete transaction' });
     } catch (e) {
       // If error
       next(e);
