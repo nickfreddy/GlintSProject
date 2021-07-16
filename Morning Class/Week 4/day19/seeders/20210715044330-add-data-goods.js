@@ -6,7 +6,7 @@ module.exports = {
     await queryInterface.bulkInsert('goods', [
       {
         name: faker.commerce.productName(),
-        price: faker.commerce.price(),
+        price: faker.commerce.price() * 14000,
         id_supplier: 1,
         image: faker.image.imageUrl(),
         createdAt: new Date(),
@@ -14,7 +14,7 @@ module.exports = {
       },
       {
         name: faker.commerce.productName(),
-        price: faker.commerce.price(),
+        price: faker.commerce.price() * 14000,
         id_supplier: 2,
         image: faker.image.imageUrl(),
         createdAt: new Date(),
@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         name: faker.commerce.productName(),
-        price: faker.commerce.price(),
+        price: faker.commerce.price() * 14000,
         id_supplier: 3,
         image: faker.image.imageUrl(),
         createdAt: new Date(),
