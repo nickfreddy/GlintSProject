@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.good.hasMany(models.transaction, {
-        foreignKey: 'id_good',
-      });
       models.good.belongsTo(models.supplier, {
         foreignKey: 'id_supplier',
+      });
+      models.good.hasMany(models.transaction, {
+        foreignKey: 'id_good',
       });
     }
   }
@@ -26,8 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      paranoid: true, // enables deletedAt (soft delete)
-      timestamps: true, // enables createdAt and updatedAt
+      paranoid: true, // enable soft delete (deletedAt)
+      timestamps: true, // enable createdAt and updatedAt
       modelName: 'good',
     }
   );
