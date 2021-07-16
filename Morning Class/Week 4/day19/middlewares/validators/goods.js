@@ -22,8 +22,6 @@ exports.createGoodValidator = async (req, res, next) => {
       return next({ statusCode: 400, messages: errorMessages });
     }
 
-    console.log(req.files);
-
     // If image was uploaded
     if (req.files) {
       // req.files.image is come from key (file) in postman
