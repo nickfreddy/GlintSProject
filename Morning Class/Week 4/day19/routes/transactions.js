@@ -2,8 +2,7 @@ const express = require('express');
 
 // Import validators
 const {
-  createTransactionValidator,
-  updateTransactionValidator,
+  createOrUpdateTransactionValidator,
 } = require('../middlewares/validators/transactions');
 
 // Import controllers
@@ -21,13 +20,13 @@ const router = express.Router();
 router
   .route('/')
   .get(getAllTransactions)
-  .post(createTransactionValidator, createTransaction);
+  .post(createOrUpdateTransactionValidator, createTransaction);
 
 // It will find route that has /:id first after that it will find is it GET or PUT or DELETE
 router
   .route('/:id')
   .get(getDetailTransaction)
-  .put(updateTransactionValidator, updateTransaction)
+  .put(createOrUpdateTransactionValidator, updateTransaction)
   .delete(deleteTransaction);
 
 module.exports = router;
