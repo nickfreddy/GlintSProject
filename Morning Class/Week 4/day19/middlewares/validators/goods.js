@@ -23,7 +23,7 @@ exports.createGoodValidator = async (req, res, next) => {
     }
 
     // If image was uploaded
-    if (req.files) {
+    if (req.files.image) {
       // req.files.image is come from key (file) in postman
       const file = req.files.image;
 
