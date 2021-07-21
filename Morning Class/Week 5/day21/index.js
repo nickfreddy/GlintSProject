@@ -23,6 +23,15 @@ app.use(
 /* Use routes */
 app.use('/transactions', transactions);
 
+/* If routes not found */
+app.all('*', (req, res, next) => {
+  try {
+    next({ message: 'Endpoint not Found', statusCode: 404 });
+  } catch (error) {
+    next(error);
+  }
+});
+
 /* User errorHandler */
 app.use(errorHandler);
 
