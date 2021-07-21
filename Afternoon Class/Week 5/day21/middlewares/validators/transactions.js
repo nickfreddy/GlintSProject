@@ -2,7 +2,7 @@ const validator = require('validator');
 const { ObjectId } = require('mongodb');
 const connection = require('../../models');
 
-exports.createTransactionValidator = async (req, res, next) => {
+exports.createOrUpdateTransactionValidator = async (req, res, next) => {
   try {
     const errorMessages = [];
 

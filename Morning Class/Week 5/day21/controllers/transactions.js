@@ -10,6 +10,10 @@ class Transactions {
         .find()
         .toArray();
 
+      if (data.length === 0) {
+        return next({ message: 'Transactions not found', statusCode: 404 });
+      }
+
       res.status(200).json({ data });
     } catch (error) {
       next(error);
@@ -18,10 +22,24 @@ class Transactions {
 
   async getDetailTransaction(req, res, next) {
     try {
-      const data = await connection
+      let data = await connection
         .db('sales_morning')
         .collection('transactions')
         .findOne({ _id: ObjectId(req.params.id) });
+
+      if (!data) {
+        return next({ message: 'Transactions not found', statusCode: 404 });
+      }
+
+      data.customer = await connection
+        .db('sales_morning')
+        .collection('customers')
+        .findOne({ _id: ObjectId(data.id_customer) });
+
+      data.good.supplier = await connection
+        .db('sales_morning')
+        .collection('suppliers')
+        .findOne({ _id: ObjectId(data.good.id_supplier) });
 
       res.status(200).json({ data });
     } catch (error) {
@@ -37,10 +55,15 @@ class Transactions {
         .collection('transactions')
         .insertOne(req.body);
 
-      const data = await connection
+      let data = await connection
         .db('sales_morning')
         .collection('transactions')
         .findOne({ _id: newData.insertedId });
+
+      data.customer = await connection
+        .db('sales_morning')
+        .collection('customers')
+        .findOne({ _id: ObjectId(data.id_customer) });
 
       // Find good supplier
       data.good.supplier = await connection
@@ -67,6 +90,17 @@ class Transactions {
         .db('sales_morning')
         .collection('transactions')
         .findOne({ _id: ObjectId(req.params.id) });
+
+      data.customer = await connection
+        .db('sales_morning')
+        .collection('customers')
+        .findOne({ _id: ObjectId(data.id_customer) });
+
+      // Find good supplier
+      data.good.supplier = await connection
+        .db('sales_morning')
+        .collection('suppliers')
+        .findOne({ _id: ObjectId(data.good.id_supplier) });
 
       // If success
       res.status(201).json({ data });

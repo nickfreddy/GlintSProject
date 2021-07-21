@@ -2,7 +2,7 @@ const express = require('express');
 
 // Import validator
 const {
-  createTransactionValidator,
+  createOrUpdateTransactionValidator,
 } = require('../middlewares/validators/transactions');
 
 // Import controller
@@ -19,13 +19,13 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(createTransactionValidator, createTransaction)
+  .post(createOrUpdateTransactionValidator, createTransaction)
   .get(getAllTransactions);
 
 router
   .route('/:id')
   .get(getDetailTransaction)
-  .put(updateTransaction)
+  .put(createOrUpdateTransactionValidator, updateTransaction)
   .delete(deleteTransaction);
 
 module.exports = router;
