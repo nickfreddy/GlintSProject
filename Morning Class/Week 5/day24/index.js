@@ -2,6 +2,7 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 }); // Config environment
 const express = require('express'); // Import express
+const fileUpload = require('express-fileupload');
 
 const app = express(); // Make express app
 
@@ -19,6 +20,12 @@ app.use(
     extended: true,
   })
 );
+
+/* Enable req.body and req.files (form-data) */
+app.use(fileUpload());
+
+/* Make public folder as static */
+app.use(express.static('public'));
 
 /* Use routes */
 app.use('/transactions', transactions);

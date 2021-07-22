@@ -10,3 +10,8 @@ mongoose
   })
   .then(() => console.log('MongoDB Connected!'))
   .catch((err) => console.error(err));
+
+exports.good = require('./good');
+exports.customer = require('./customer');
+exports.supplier = require('./supplier');
+exports.transaction = require('./transaction');
