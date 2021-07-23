@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development npx nodemon index"
+    "dev": "NODE_ENV=development npx nodemon index",
+    "seed:dev": "NODE_ENV=development node seeders add",
+    "seed:dev:remove": "NODE_ENV=development node seeders remove"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +20,7 @@
     "validator": "^13.6.0"
   },
   "devDependencies": {
+    "faker": "^5.5.3",
     "nodemon": "^2.0.12"
   }
 }
