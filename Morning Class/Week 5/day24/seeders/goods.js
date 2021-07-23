@@ -10,7 +10,7 @@ exports.addGoods = async () => {
       name: faker.commerce.productName(),
       price: faker.commerce.price() * 14000,
       supplier: suppliers[Math.floor(Math.random() * suppliers.length)]._id,
-      image: faker.image.imageUrl(),
+      photo: faker.image.imageUrl(),
     });
   }
 
