@@ -1,3 +1,6 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+}); // Config environment
 const mongoose = require('mongoose');
 
 mongoose
@@ -5,7 +8,7 @@ mongoose
     useCreateIndex: true, // Enable unique
     useNewUrlParser: true, // Must be true
     useUnifiedTopology: true, // Must be true
-    useFindAndModify: false, // to use updateOne and updataeMany
+    useFindAndModify: false, // to use updateOne and updateMany
   })
   .then(() => console.log('MongoDB Connected'))
   .catch((err) => console.log(err));

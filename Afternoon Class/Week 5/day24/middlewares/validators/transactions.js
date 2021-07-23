@@ -2,6 +2,18 @@ const validator = require('validator');
 const mongoose = require('mongoose');
 const { good, customer } = require('../../models');
 
+exports.getDetailValidator = async (req, res, next) => {
+  try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return next({ message: 'id is not valid', statusCode: 400 });
+    }
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.createOrUpdateTransactionValidator = async (req, res, next) => {
   try {
     /* Validate the user input */
@@ -38,7 +50,7 @@ exports.createOrUpdateTransactionValidator = async (req, res, next) => {
     }
 
     // Find price and calculate total
-    req.body.total = parseInt(req.body.quantity) * parseFloat(good.price);
+    req.body.total = parseInt(req.body.quantity) * parseFloat(data[0].price);
     req.body.good = data[0];
     req.body.customer = req.body.id_customer;
 
