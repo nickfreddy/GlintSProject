@@ -54,6 +54,50 @@ class Transactions {
       next(error);
     }
   }
+
+  async updateTransaction(req, res, next) {
+    try {
+      // Update data
+      let data = await transaction
+        .findOneAndUpdate(
+          {
+            _id: req.params.id,
+          },
+          req.body, // This is all of req.body
+          {
+            new: true,
+          }
+        )
+        .populate('customer');
+      // new is to return the updated transaction data
+      // If no new, it will return the old data before updated
+
+      if (!data) {
+        return next({ message: 'Transaction not found', statusCode: 404 });
+      }
+
+      data.good.supplier = await supplier.findOne({ _id: data.good.supplier });
+
+      // If success
+      return res.status(201).json({ data });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async deleteTransaction(req, res, next) {
+    try {
+      const data = await transaction.delete({ _id: req.params.id });
+
+      if (data.n === 0) {
+        return next({ message: 'Transaction not found', statusCode: 404 });
+      }
+
+      res.status(200).json({ message: 'Transaction has been deleted' });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = new Transactions();

@@ -21,6 +21,8 @@ router.post('/', createOrUpdateTransactionValidator, createTransaction);
 router.get('/', getAllTransactions);
 
 router.get('/:id', getDetailValidator, getDetailTransaction);
+router.put('/:id', createOrUpdateTransactionValidator, updateTransaction);
+router.delete('/:id', deleteTransaction);
 
 // Export
 module.exports = router;
