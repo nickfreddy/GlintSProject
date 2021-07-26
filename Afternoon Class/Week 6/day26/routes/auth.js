@@ -1,10 +1,13 @@
 const express = require('express');
 
 // Import auth
-const { signup } = require('../middlewares/auth');
+const { signup, signin } = require('../middlewares/auth');
 
 // Import validator
-const { signUpValidator } = require('../middlewares/validators/auth');
+const {
+  signUpValidator,
+  signInValidator,
+} = require('../middlewares/validators/auth');
 
 // Import controller
 const { getToken } = require('../controllers/auth');
@@ -14,6 +17,7 @@ const router = express.Router();
 
 // Make routes
 router.post('/signup', signUpValidator, signup, getToken);
+router.post('/signin', signInValidator, signin, getToken);
 
 // Exports
 module.exports = router;
