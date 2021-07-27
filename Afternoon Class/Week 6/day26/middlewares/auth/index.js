@@ -88,3 +88,123 @@ passport.use(
     }
   )
 );
+
+// Logic for admin
+exports.admin = (req, res, next) => {
+  passport.authorize('admin', { session: false }, (err, user, info) => {
+    if (err) {
+      return next({ message: err.message, statusCode: 403 });
+    }
+
+    if (!user) {
+      return next({ message: info.message, statusCode: 403 });
+    }
+
+    req.user = user;
+
+    next();
+  })(req, res, next);
+};
+
+passport.use(
+  'admin',
+  new JWTstrategy(
+    {
+      secretOrKey: process.env.JWT_SECRET,
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+    },
+    async (token, done) => {
+      try {
+        const data = await user.findOne({ _id: token.user });
+
+        if (data.role === 'admin') {
+          return done(null, token);
+        }
+
+        return done(null, false, { message: 'Forbidden access' });
+      } catch (error) {
+        return done(error, false, { message: 'Forbidden access' });
+      }
+    }
+  )
+);
+
+// Logic for user
+exports.user = (req, res, next) => {
+  passport.authorize('user', { session: false }, (err, user, info) => {
+    if (err) {
+      return next({ message: err.message, statusCode: 403 });
+    }
+
+    if (!user) {
+      return next({ message: info.message, statusCode: 403 });
+    }
+
+    req.user = user;
+
+    next();
+  })(req, res, next);
+};
+
+passport.use(
+  'user',
+  new JWTstrategy(
+    {
+      secretOrKey: process.env.JWT_SECRET,
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+    },
+    async (token, done) => {
+      try {
+        const data = await user.findOne({ _id: token.user });
+
+        if (data.role === 'user') {
+          return done(null, token);
+        }
+
+        return done(null, false, { message: 'Forbidden access' });
+      } catch (error) {
+        return done(error, false, { message: 'Forbidden access' });
+      }
+    }
+  )
+);
+
+// Logic for admin or user
+exports.adminOrUser = (req, res, next) => {
+  passport.authorize('adminOrUser', { session: false }, (err, user, info) => {
+    if (err) {
+      return next({ message: err.message, statusCode: 403 });
+    }
+
+    if (!user) {
+      return next({ message: info.message, statusCode: 403 });
+    }
+
+    req.user = user;
+
+    next();
+  })(req, res, next);
+};
+
+passport.use(
+  'adminOrUser',
+  new JWTstrategy(
+    {
+      secretOrKey: process.env.JWT_SECRET,
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+    },
+    async (token, done) => {
+      try {
+        const data = await user.findOne({ _id: token.user });
+
+        if (data.role === 'admin' || data.role === 'user') {
+          return done(null, token);
+        }
+
+        return done(null, false, { message: 'Forbidden access' });
+      } catch (error) {
+        return done(error, false, { message: 'Forbidden access' });
+      }
+    }
+  )
+);

@@ -7,7 +7,7 @@ class User {
         user: req.user._id,
       };
 
-      const token = jwt.sign(data, 'freddywijaya');
+      const token = jwt.sign(data, process.env.JWT_SECRET);
 
       res.status(200).json({ token });
     } catch (error) {

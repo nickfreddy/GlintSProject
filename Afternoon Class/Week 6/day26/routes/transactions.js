@@ -1,5 +1,8 @@
 const express = require('express');
 
+// Import auth
+const { admin, user, adminOrUser } = require('../middlewares/auth');
+
 // Import validator
 const {
   createOrUpdateTransactionValidator,
@@ -22,7 +25,7 @@ const router = express.Router();
 router.post('/', createOrUpdateTransactionValidator, createTransaction);
 router.get('/', getAllTransactions);
 
-router.get('/:id', getDetailValidator, getDetailTransaction);
+router.get('/:id', user, getDetailValidator, getDetailTransaction);
 router.put('/:id', createOrUpdateTransactionValidator, updateTransaction);
 router.delete('/:id', deleteTransaction);
 
