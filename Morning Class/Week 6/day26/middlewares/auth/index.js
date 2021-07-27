@@ -91,7 +91,7 @@ passport.use(
 
 // Logic for admin
 exports.admin = (req, res, next) => {
-  passport.authenticate('admin', { session: false }, (err, user, info) => {
+  passport.authorize('admin', { session: false }, (err, user, info) => {
     if (err) {
       return next({ message: err.message, statusCode: 403 });
     }
@@ -131,7 +131,7 @@ passport.use(
 
 // Logic for user
 exports.user = (req, res, next) => {
-  passport.authenticate('user', { session: false }, (err, user, info) => {
+  passport.authorize('user', { session: false }, (err, user, info) => {
     if (err) {
       return next({ message: err.message, statusCode: 403 });
     }
@@ -171,23 +171,19 @@ passport.use(
 
 // Logic for admin or user
 exports.adminOrUser = (req, res, next) => {
-  passport.authenticate(
-    'adminOrUser',
-    { session: false },
-    (err, user, info) => {
-      if (err) {
-        return next({ message: err.message, statusCode: 403 });
-      }
-
-      if (!user) {
-        return next({ message: info.message, statusCode: 403 });
-      }
-
-      req.user = user;
-
-      next();
+  passport.authorize('adminOrUser', { session: false }, (err, user, info) => {
+    if (err) {
+      return next({ message: err.message, statusCode: 403 });
     }
-  )(req, res, next);
+
+    if (!user) {
+      return next({ message: info.message, statusCode: 403 });
+    }
+
+    req.user = user;
+
+    next();
+  })(req, res, next);
 };
 
 passport.use(
