@@ -58,3 +58,12 @@ describe('/transactions POST', () => {
     expect(response.body).toBeInstanceOf(Object);
   });
 });
+
+describe('/transactions GET', () => {
+  it('Transactions must extst', async () => {
+    const response = await request(app).get('/transactions');
+
+    expect(response.statusCode).toEqual(200);
+    expect(response.body).toBeInstanceOf(Object);
+  });
+});
