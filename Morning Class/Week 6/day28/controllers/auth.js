@@ -8,7 +8,9 @@ class Auth {
         user: req.user._id,
       };
 
-      const token = jwt.sign(data, process.env.JWT_SECRET);
+      const token = jwt.sign(data, process.env.JWT_SECRET, {
+        expiresIn: '60d',
+      });
 
       res.status(200).json({ token });
     } catch (error) {
