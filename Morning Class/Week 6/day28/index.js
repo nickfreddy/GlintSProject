@@ -9,6 +9,9 @@ const app = express(); // Make express app
 /* Import routes */
 const transactions = require('./routes/transactions');
 const auth = require('./routes/auth');
+const suppliers = require('./routes/suppliers');
+const goods = require('./routes/goods');
+const customers = require('./routes/customers');
 
 /* Import errorHandler */
 const errorHandler = require('./middlewares/errorHandler');
@@ -31,6 +34,9 @@ app.use(express.static('public'));
 /* Use routes */
 app.use('/transactions', transactions);
 app.use('/auth', auth);
+app.use('/suppliers', suppliers);
+app.use('/goods', goods);
+app.use('/customers', customers);
 
 /* If routes not found */
 app.all('*', (req, res, next) => {
@@ -46,7 +52,7 @@ app.use(errorHandler);
 
 /* Running server */
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(3000, () => console.log(`Server running on port 3000!`));
+  app.listen(5000, () => console.log(`Server running on port 3000!`));
 }
 
 module.exports = app;

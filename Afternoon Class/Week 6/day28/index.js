@@ -9,13 +9,16 @@ const app = express(); // Make express app
 /* Import routes */
 const transactions = require('./routes/transactions');
 const auth = require('./routes/auth');
+const suppliers = require('./routes/suppliers');
+const goods = require('./routes/goods');
+const customers = require('./routes/customers');
 
-/* Import errorHander */
+/* Import errorHandler */
 const errorHandler = require('./middlewares/errorHandler');
 
-/* Enables req.body */
-app.use(express.json()); // Enables req.body (JSON)
-// Enables req.body (url-encoded)
+/* Enable req.body */
+app.use(express.json()); // Enable req.body JSON
+// Enable url-encoded
 app.use(
   express.urlencoded({
     extended: true,
@@ -25,28 +28,31 @@ app.use(
 /* Enable req.body and req.files (form-data) */
 app.use(fileUpload());
 
-/* Make public folder for static file */
+/* Make public folder as static */
 app.use(express.static('public'));
 
-/* Use the routes */
+/* Use routes */
 app.use('/transactions', transactions);
 app.use('/auth', auth);
+app.use('/suppliers', suppliers);
+app.use('/goods', goods);
+app.use('/customers', customers);
 
-/* If route not found */
+/* If routes not found */
 app.all('*', (req, res, next) => {
   try {
-    next({ message: 'Endpoint not found', statusCode: 404 });
+    next({ message: 'Endpoint not Found', statusCode: 404 });
   } catch (error) {
     next(error);
   }
 });
 
-/* Use error handler */
+/* User errorHandler */
 app.use(errorHandler);
 
-/* Run the server */
+/* Running server */
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(3000, () => console.log(`Server running on 3000`));
+  app.listen(5000, () => console.log(`Server running on port 3000!`));
 }
 
 module.exports = app;
