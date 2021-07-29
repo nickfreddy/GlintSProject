@@ -22,12 +22,17 @@ const {
 const router = express.Router();
 
 // Make some routes
-router.post('/', createOrUpdateTransactionValidator, createTransaction);
-router.get('/', getAllTransactions);
+router.post('/', admin, createOrUpdateTransactionValidator, createTransaction);
+router.get('/', adminOrUser, getAllTransactions);
 
-router.get('/:id', user, getDetailValidator, getDetailTransaction);
-router.put('/:id', createOrUpdateTransactionValidator, updateTransaction);
-router.delete('/:id', deleteTransaction);
+router.get('/:id', adminOrUser, getDetailValidator, getDetailTransaction);
+router.put(
+  '/:id',
+  admin,
+  createOrUpdateTransactionValidator,
+  updateTransaction
+);
+router.delete('/:id', admin, deleteTransaction);
 
-// Exports
+// Export
 module.exports = router;
