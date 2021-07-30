@@ -39,7 +39,7 @@ deploy:
     - echo "JWT_SECRET"=$JWT_SECRET >> .env.production
     - npm i --only=prod
     # Restart NodeJS service
-    - npm run stop
+    - npm run stop || true
     - npm run start
   only:
     - production
