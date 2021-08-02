@@ -83,6 +83,14 @@ app.use(fileUpload());
 app.use(express.static('public'));
 
 /* Use routes */
+app.get('/', async (req, res, next) => {
+  try {
+    res.redirect('https://documenter.getpostman.com/view/3884681/TzsfmkQp');
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.use('/transactions', transactions);
 app.use('/auth', auth);
 app.use('/suppliers', suppliers);
